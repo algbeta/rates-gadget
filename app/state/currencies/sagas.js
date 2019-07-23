@@ -1,18 +1,22 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import { apiGet } from '../common/api';
-import API_URLS from '../../utils/apiUrls';
 import { actions } from '.';
 
 export function* fetchCurrencies() {
-  yield takeLatest(actions.actionTypes.FETCH_CURRENCIES, function*() {
+  yield takeLatest(actions.actionTypes.FETCH_CURRENCIES, function*(action) {
     let response = {};
     try {
-      response = yield apiGet({ url: API_URLS.getLatest() });
+      response = yield apiGet({ url: action.url });
     } catch (e) {
       yield put(actions.fetchCurrenciesFail(e));
       return;
     }
-
-    yield put(actions.fetchCurrenciesSuccess(response));
+    
+    yield put(
+      actions.fetchCurrenciesSuccess({
+        base: response.base,
+        rates: response.rates,
+      }),
+    );
   });
 }

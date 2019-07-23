@@ -14,12 +14,13 @@ const withSaga = injectSaga({
 });
 
 const mapStateToProps = ({ exchange }) => ({
-  exchangedAmount: exchange.amount * 1, //pretend to know the rate
+  exchangedAmount: exchange.amount * exchange.from,
+  from: exchange.from,
 });
 
 const mapDispatchToProps = {
   fetchCurrencies: actions.fetchCurrencies,
-  setExchangeAmount: actions.setExchangeAmount,
+  setSelectedCurrency: actions.setSelectedCurrency,
 };
 
 const withConnect = connect(

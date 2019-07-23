@@ -16,4 +16,10 @@ const currencies = {
   },
 };
 
+const currencyTypeToSelect = {
+  from: 'from',
+  to: 'to',
+};
+
+export { currencyTypeToSelect };
 export default currencies;

@@ -1,24 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import currencies from '../../utils/currencies';
+import { connect } from 'react-redux';
+import { actions } from '../../state/currencies';
+import CurrencySelector from './currencySelector';
 
-const CurrencySelector = ({ name, selected, handler }) => (
-  <select name={name} selected={selected} onChange={handler}>
-    {Object.keys(currencies).map(key => (
-      <option
-        value={currencies[key].shortcut}
-        key={`${name}-${currencies[key].shortcut}`}
-      >
-        {currencies[key].name}
-      </option>
-    ))}
-  </select>
-);
+const mapStateToProps = ({ exchange }, ownProps) => ({
+  selected: exchange[ownProps.name]
+});
 
-CurrencySelector.propTypes = {
-  name: PropTypes.string.isRequired,
-  selected: PropTypes.string,
-  handler: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  setSelectedCurrency: actions.setSelectedCurrency,
 };
 
-export default CurrencySelector;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CurrencySelector);
