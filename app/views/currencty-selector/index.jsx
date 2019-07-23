@@ -7,7 +7,7 @@ const mapStateToProps = ({ exchange }, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-  setSelectedCurrency: actions.setSelectedCurrency,
+  setSelectedCurrency: actions.setSelectedCurrency
 };
 
 export default connect(

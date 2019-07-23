@@ -4,7 +4,6 @@ const generateParams = base => {
   const keys = Object.keys(currencies);
   const baseIndex = keys.findIndex(item => item === base);
   keys.splice(baseIndex, 1);
-
   return keys.join(',');
 };
 

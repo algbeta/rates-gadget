@@ -13,14 +13,20 @@ const withSaga = injectSaga({
   mode: DAEMON,
 });
 
-const mapStateToProps = ({ exchange }) => ({
-  exchangedAmount: exchange.amount * exchange.from,
-  from: exchange.from,
-});
+const mapStateToProps = ({ exchange }) => {
+  let rate = 1;
+  if (exchange[exchange.from] && exchange[exchange.from][exchange.to]) {
+    rate = exchange[exchange.from][exchange.to];
+  }
+
+  return {
+    exchangedAmount: +(exchange.amount * rate).toFixed(2),
+    from: exchange.from,
+  };
+};
 
 const mapDispatchToProps = {
-  fetchCurrencies: actions.fetchCurrencies,
-  setSelectedCurrency: actions.setSelectedCurrency,
+  fetchCurrenciesPeriodically: actions.fetchCurrenciesPeriodically,
 };
 
 const withConnect = connect(

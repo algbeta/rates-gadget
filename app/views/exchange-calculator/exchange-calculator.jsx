@@ -2,27 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { currencyTypeToSelect } from '../../utils/currencies';
 import CurrencySelector from '../currencty-selector';
+import AmountInput from '../amount-input';
 
 class ExchangeCalculator extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      intervalId: null,
-    };
-  }
-
   componentDidMount() {
-    const { fetchCurrencies } = this.props;
-    const intervalId = setInterval(() => {
-      fetchCurrencies(this.props.from);
-    }, 10000);
-
-    this.setState({ intervalId });
+    this.props.fetchCurrenciesPeriodically(true);
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.intervalId);
+    this.props.fetchCurrenciesPeriodically(false);
   }
 
   render() {
@@ -30,7 +18,7 @@ class ExchangeCalculator extends React.Component {
       <div>
         <h1>Currency exchange</h1>
         <CurrencySelector name={currencyTypeToSelect.from} />
-        <input name="amount" />
+        <AmountInput />
         <CurrencySelector name={currencyTypeToSelect.to} />
         <span>{this.props.exchangedAmount}</span>
       </div>
@@ -39,7 +27,7 @@ class ExchangeCalculator extends React.Component {
 }
 
 ExchangeCalculator.propTypes = {
-  fetchCurrencies: PropTypes.func.isRequired,
+  fetchCurrenciesPeriodically: PropTypes.func.isRequired,
   exchangedAmount: PropTypes.number,
 };
 

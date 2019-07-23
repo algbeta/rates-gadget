@@ -11,21 +11,23 @@ class CurrencySelector extends React.Component {
 
   onSelectChange(ev) {
     const { setSelectedCurrency, name } = this.props;
-    setSelectedCurrency(ev.target.value, name);
+
+    const currency = ev.target.value;
+    setSelectedCurrency(currency, name);
   }
 
   render() {
     const { name, selected } = this.props;
     return (
-      <select name={name} selected={selected} onChange={this.onSelectChange}>
+      <select
+        name={name}
+        defaultValue={selected}
+        onChange={this.onSelectChange}
+      >
         {Object.keys(currencies).map(key => {
           const currency = currencies[key].shortcut;
           return (
-            <option
-              value={currency}
-              key={`${name}-${currency}`}
-              selected={currency === selected}
-            >
+            <option value={currency} key={`${name}-${currency}`}>
               {currencies[key].name}
             </option>
           );

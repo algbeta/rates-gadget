@@ -7,6 +7,7 @@ const actionTypes = {
   FETCH_CURRENCIES_FAIL: '@@rates-widget/FETCH_CURRENCIES_FAIL',
   SET_EXCHANGE_AMOUNT: '@@rates-widget/SET_EXCHANGE_AMOUNT',
   SET_SELECTED_CURRENCY: '@@rates-widget/SET_SELECTED_CURRENCY',
+  FETCH_CURRENCIES_PERIODICALLY: '@@rates-widget/INIT_CURRENCY_UPDATE',
 };
 
 const fetchCurrencies = base => {
@@ -14,9 +15,13 @@ const fetchCurrencies = base => {
   return {
     type: actionTypes.FETCH_CURRENCIES,
     url,
-    base,
   };
 };
+
+const fetchCurrenciesPeriodically = flag => ({
+  type: actionTypes.FETCH_CURRENCIES_PERIODICALLY,
+  updating: flag,
+});
 
 const fetchCurrenciesFail = error => ({
   type: actionTypes.FETCH_CURRENCIES_FAIL,
@@ -47,6 +52,7 @@ export {
   fetchCurrencies,
   fetchCurrenciesFail,
   fetchCurrenciesSuccess,
+  fetchCurrenciesPeriodically,
   setExchangeAmount,
   setSelectedCurrency,
 };

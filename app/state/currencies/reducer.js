@@ -4,6 +4,7 @@ const initialState = {
   amount: 0,
   [currencyTypeToSelect.from]: currencies.GBP.shortcut,
   [currencyTypeToSelect.to]: currencies.USD.shortcut,
+  updating: false,
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +21,18 @@ export default function(state = initialState, action) {
         [action.base]: {
           ...action.rates,
         },
+      };
+    }
+    case actionTypes.FETCH_CURRENCIES_PERIODICALLY: {
+      return {
+        ...state,
+        updating: action.updating,
+      };
+    }
+    case actionTypes.SET_SELECTED_CURRENCY: {
+      return {
+        ...state,
+        [action.selectType]: action.currency,
       };
     }
     default:

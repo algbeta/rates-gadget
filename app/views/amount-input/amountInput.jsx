@@ -5,10 +5,9 @@ class AmountInput extends React.PureComponent {
   constructor() {
     super();
     this.validate = this.validate.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  // in case quantity of inputs/ types of validation increase
-  // I would separate validation logic or use a solution similar to redux-forms
   validate(value) {
     return /^\d+$/.test(value);
   }
@@ -17,20 +16,22 @@ class AmountInput extends React.PureComponent {
     const {
       target: { value },
     } = ev;
+    debugger;
     if (this.validate(value)) {
       this.props.setExchangeAmount(ev.target.value);
-     
     }
   }
 
   render() {
-    return <input onChange={this.handleChange} />;
+    return (
+      <input onChange={this.handleChange} value={this.props.exchangedAmount} />
+    );
   }
 }
 
 AmountInput.propTypes = {
   setExchangeAmount: PropTypes.func.isRequired,
   exchangedAmount: PropTypes.number,
-}
+};
 
 export default AmountInput;

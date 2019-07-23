@@ -1,6 +1,14 @@
 import { all, fork } from 'redux-saga/effects';
-import { fetchCurrencies } from '../currencies/sagas';
+import {
+  fetchCurrencies,
+  fetchCurrenciesPeriodically,
+  fetchSelectedCurrency,
+} from '../currencies/sagas';
 
 export default function* rootSaga() {
-  yield all([fork(fetchCurrencies)]);
+  yield all([
+    fork(fetchCurrencies),
+    fork(fetchCurrenciesPeriodically),
+    fork(fetchSelectedCurrency),
+  ]);
 }
