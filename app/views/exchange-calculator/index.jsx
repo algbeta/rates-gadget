@@ -16,14 +16,19 @@ const withSaga = injectSaga({
 });
 
 const mapStateToProps = ({ EW: { exchange, amount } }) => {
-  let rate = 1;
+  let rate = 0;
+  if (exchange.from === exchange.to) {
+    rate = 1;
+  }
   if (exchange[exchange.from] && exchange[exchange.from][exchange.to]) {
     rate = exchange[exchange.from][exchange.to];
   }
 
   return {
-    exchangedAmount: (+amount.value * rate).toFixed(2),
+    userEnteredData: !!amount.value,
+    exchangedAmount: +(+amount.value * rate).toFixed(2),
     from: exchange.from,
+    to: exchange.to,
   };
 };
 
