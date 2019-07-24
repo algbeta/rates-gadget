@@ -15,10 +15,12 @@ class ExchangeCalculator extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Currency exchange</h1>
-        <CurrencySelector name={currencyTypeToSelect.from} />
-        <AmountInput />
+        <div className="form-group">
+          <CurrencySelector name={currencyTypeToSelect.from} />
+          <AmountInput className="mt-5" />
+        </div>
         <CurrencySelector name={currencyTypeToSelect.to} />
         <span>{this.props.exchangedAmount}</span>
       </div>

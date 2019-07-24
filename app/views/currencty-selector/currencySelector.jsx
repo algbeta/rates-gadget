@@ -23,6 +23,7 @@ class CurrencySelector extends React.Component {
         name={name}
         defaultValue={selected}
         onChange={this.onSelectChange}
+        className="custom-select mr-sm-2"
       >
         {Object.keys(currencies).map(key => {
           const currency = currencies[key].shortcut;

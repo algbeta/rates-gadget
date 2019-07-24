@@ -4,6 +4,8 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = options => ({
   mode: options.mode,
@@ -20,12 +22,35 @@ module.exports = options => ({
   module: {
     rules: [
       {
-        test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: options.babelQuery,
         },
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: 'style-loader', // inject CSS to page
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS modules
+          },
+          {
+            loader: 'postcss-loader', // Run post css actions
+            options: {
+              plugins() {
+                // post css plugins, can be exported to postcss.config.js
+                return [precss, autoprefixer];
+              },
+            },
+          },
+          {
+            loader: 'sass-loader', // compiles Sass to CSS
+          },
+        ],
       },
       {
         // Preprocess our own .css files

@@ -4,34 +4,35 @@ import PropTypes from 'prop-types';
 class AmountInput extends React.PureComponent {
   constructor() {
     super();
-    this.validate = this.validate.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  validate(value) {
-    return /^\d+$/.test(value);
+  handleChange(ev) {
+    this.props.inputExchangeAmount(ev.target.value);
   }
 
-  handleChange(ev) {
-    const {
-      target: { value },
-    } = ev;
-    debugger;
-    if (this.validate(value)) {
-      this.props.setExchangeAmount(ev.target.value);
-    }
+  getInputClassNames() {
+    return this.props.validationFailed
+      ? 'form-control  is-invalid'
+      : 'form-control';
   }
 
   render() {
     return (
-      <input onChange={this.handleChange} value={this.props.exchangedAmount} />
+      <React.Fragment>
+        <label>Only numbers, +/- and . symbols are allowed</label>
+        <input
+          className={this.getInputClassNames()}
+          onChange={this.handleChange}
+        />
+      </React.Fragment>
     );
   }
 }
 
 AmountInput.propTypes = {
-  setExchangeAmount: PropTypes.func.isRequired,
-  exchangedAmount: PropTypes.number,
+  inputExchangeAmount: PropTypes.func.isRequired,
+  validationFailed: PropTypes.bool.isRequired,
 };
 
 export default AmountInput;

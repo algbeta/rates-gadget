@@ -5,7 +5,7 @@ const actionTypes = {
   FETCH_CURRENCIES: '@@rates-widget/FETCH_CURRENCIES',
   FETCH_CURRENCIES_SUCCESS: '@@rates-widget/FETCH_CURRENCIES_SUCCESS',
   FETCH_CURRENCIES_FAIL: '@@rates-widget/FETCH_CURRENCIES_FAIL',
-  SET_EXCHANGE_AMOUNT: '@@rates-widget/SET_EXCHANGE_AMOUNT',
+
   SET_SELECTED_CURRENCY: '@@rates-widget/SET_SELECTED_CURRENCY',
   FETCH_CURRENCIES_PERIODICALLY: '@@rates-widget/INIT_CURRENCY_UPDATE',
 };
@@ -33,11 +33,6 @@ const fetchCurrenciesSuccess = data => ({
   ...data,
 });
 
-const setExchangeAmount = amount => ({
-  type: actionTypes.SET_EXCHANGE_AMOUNT,
-  amount,
-});
-
 const setSelectedCurrency = (
   currency,
   selectType = currencyTypeToSelect.from,
@@ -53,6 +48,5 @@ export {
   fetchCurrenciesFail,
   fetchCurrenciesSuccess,
   fetchCurrenciesPeriodically,
-  setExchangeAmount,
   setSelectedCurrency,
 };
