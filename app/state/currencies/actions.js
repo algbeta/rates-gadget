@@ -8,6 +8,7 @@ const actionTypes = {
 
   SET_SELECTED_CURRENCY: '@@rates-widget/SET_SELECTED_CURRENCY',
   FETCH_CURRENCIES_PERIODICALLY: '@@rates-widget/INIT_CURRENCY_UPDATE',
+  PREPARE_RATES: '@@rates-widget/PREPARE_RATES',
 };
 
 const fetchCurrencies = base => {
@@ -33,6 +34,11 @@ const fetchCurrenciesSuccess = data => ({
   ...data,
 });
 
+const prepareRates = response => ({
+  type: actionTypes.PREPARE_RATES,
+  response,
+});
+
 const setSelectedCurrency = (
   currency,
   selectType = currencyTypeToSelect.from,
@@ -49,4 +55,5 @@ export {
   fetchCurrenciesSuccess,
   fetchCurrenciesPeriodically,
   setSelectedCurrency,
+  prepareRates,
 };

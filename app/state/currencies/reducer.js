@@ -4,6 +4,7 @@ const initialState = {
   [currencyTypeToSelect.from]: currencies.GBP.shortcut,
   [currencyTypeToSelect.to]: currencies.USD.shortcut,
   updating: false,
+  base: currencies.USD.shortcut,
 };
 
 export default function(state = initialState, action) {
@@ -11,9 +12,7 @@ export default function(state = initialState, action) {
     case actionTypes.FETCH_CURRENCIES_SUCCESS: {
       return {
         ...state,
-        [action.base]: {
-          ...action.rates,
-        },
+        ...action.response,
       };
     }
     case actionTypes.FETCH_CURRENCIES_PERIODICALLY: {
