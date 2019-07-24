@@ -6,7 +6,6 @@ export default function* rootSaga() {
   yield all([
     fork(currenciesSagas.fetchCurrenciesSaga),
     fork(currenciesSagas.fetchCurrenciesPeriodicallySaga),
-    fork(currenciesSagas.fetchSelectedCurrencySaga),
     fork(amountSagas.watchInputSaga),
   ]);
 }

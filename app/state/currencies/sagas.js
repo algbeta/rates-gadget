@@ -1,4 +1,12 @@
-import { put, takeLatest, takeEvery, select, delay } from 'redux-saga/effects';
+import {
+  put,
+  takeLatest,
+  takeEvery,
+  select,
+  delay,
+  call,
+  all,
+} from 'redux-saga/effects';
 import { apiGet } from '../common/api';
 import {
   actionTypes,
@@ -6,22 +14,29 @@ import {
   fetchCurrenciesSuccess,
   fetchCurrencies,
 } from './actions';
+import currencies from '../../utils/currencies';
+import API_URLS from '../../utils/apiUrls';
 
 export function* fetchCurrenciesSaga() {
-  yield takeEvery(actionTypes.FETCH_CURRENCIES, function*(action) {
-    let response = {};
+  yield takeEvery(actionTypes.FETCH_CURRENCIES, function*() {
+    const urls = Object.keys(currencies).map(cur => API_URLS.getLatest(cur));
+    let responses = [];
     try {
-      response = yield apiGet({ url: action.url });
+      responses = yield all(urls.map(url => call(apiGet, { url })));
     } catch (e) {
       yield put(fetchCurrenciesFail(e));
       return;
     }
 
-    yield put(
-      fetchCurrenciesSuccess({
-        base: response.base,
-        rates: response.rates,
-      }),
+    yield all(
+      responses.map(response =>
+        put(
+          fetchCurrenciesSuccess({
+            base: response.base,
+            rates: response.rates,
+          }),
+        ),
+      ),
     );
   });
 }
@@ -37,18 +52,6 @@ export function* fetchCurrenciesPeriodicallySaga() {
       if (!updating) break;
       yield put(fetchCurrencies(from));
       yield delay(10000);
-    }
-  });
-}
-
-export function* fetchSelectedCurrencySaga() {
-  yield takeLatest(actionTypes.SET_SELECTED_CURRENCY, function*(action) {
-    const { currency } = action;
-    const {
-      EW: { exchange },
-    } = yield select();
-    if (!exchange[currency]) {
-      put(fetchCurrencies(currency));
     }
   });
 }
