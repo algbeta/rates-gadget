@@ -22,7 +22,7 @@ const mapStateToProps = ({ EW: { exchange, amount } }) => {
   }
 
   return {
-    exchangedAmount: +(amount.value * rate).toFixed(2),
+    exchangedAmount: (+amount.value * rate).toFixed(2),
     from: exchange.from,
   };
 };

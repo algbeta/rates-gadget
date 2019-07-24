@@ -1,4 +1,4 @@
-import { put, takeLatest, select, delay } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery, select, delay } from 'redux-saga/effects';
 import { apiGet } from '../common/api';
 import {
   actionTypes,
@@ -8,7 +8,7 @@ import {
 } from './actions';
 
 export function* fetchCurrenciesSaga() {
-  yield takeLatest(actionTypes.FETCH_CURRENCIES, function*(action) {
+  yield takeEvery(actionTypes.FETCH_CURRENCIES, function*(action) {
     let response = {};
     try {
       response = yield apiGet({ url: action.url });
@@ -36,7 +36,7 @@ export function* fetchCurrenciesPeriodicallySaga() {
       } = yield select();
       if (!updating) break;
       yield put(fetchCurrencies(from));
-      yield delay(100000);
+      yield delay(10000);
     }
   });
 }

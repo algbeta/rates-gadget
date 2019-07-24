@@ -10,7 +10,7 @@ const validate = value => /^[0-9]?[0-9]?(\.[0-9][0-9]?)?$/.test(value);
 function* handleInputSaga(action) {
   yield put(exchangeAmountValidation(false));
   if (validate(action.amount)) {
-    yield put(setExchangeAmount({ amount: action.amount }));
+    yield put(setExchangeAmount(action.amount));
   } else {
     yield put(exchangeAmountValidation(true));
   }
