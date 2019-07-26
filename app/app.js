@@ -9,7 +9,7 @@ import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
-import ExchangeCalculator from './views/exchange-calculator';
+import App from './views';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -26,7 +26,7 @@ const MOUNT_NODE = document.getElementById('app');
 
 ReactDOM.render(
   <Provider store={store}>
-    <ExchangeCalculator />
+    <App />
   </Provider>,
   MOUNT_NODE,
 );

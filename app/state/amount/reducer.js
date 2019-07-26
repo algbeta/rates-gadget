@@ -1,3 +1,4 @@
+import { actions as accountActions } from '../account';
 import { actionTypes } from './actions';
 const initialState = {
   value: 0,
@@ -16,6 +17,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: action.isValid,
+      };
+    }
+    case accountActions.actionTypes.VALIDATED_MONEY_TRANSFER: {
+      return {
+        ...state,
+        value: 0,
       };
     }
     default:

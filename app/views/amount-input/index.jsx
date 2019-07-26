@@ -4,6 +4,7 @@ import AmountInput from './amountInput';
 
 const mapStateToProps = ({ EW: { amount } }) => ({
   validationFailed: amount.error,
+  amount: amount.value,
 });
 
 const mapDispatchToProps = {

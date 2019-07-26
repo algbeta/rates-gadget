@@ -8,6 +8,12 @@ import Spinner from '../spinner';
 import Rate from '../rate';
 
 class ExchangeCalculator extends React.Component {
+  constructor() {
+    super();
+
+    this.transferMoney = this.transferMoney.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchCurrenciesPeriodically(true);
   }
@@ -16,22 +22,39 @@ class ExchangeCalculator extends React.Component {
     this.props.fetchCurrenciesPeriodically(false);
   }
 
+  transferMoney() {
+    const { exchangedAmount, amount, transfer } = this.props;
+    transfer(exchangedAmount, amount);
+  }
+
   render() {
-    const { exchangedAmount, userEnteredData, from, to } = this.props;
+    const { exchangedAmount, from, to, amount } = this.props;
     return (
       <div className="container">
         <h1>Currency exchange</h1>
-        <Rate from={from} to={to} />
-        <br />
-        <Rate from={to} to={from} />
         <div className="form-group">
+          <Rate from={from} to={to} />
           <CurrencySelector name={currencyTypeToSelect.from} />
           <Account currency={from} />
-          <AmountInput className="mt-5" />
         </div>
-        <CurrencySelector name={currencyTypeToSelect.to} />
-        <Account currency={to} />
-        <span>{exchangedAmount || (userEnteredData && <Spinner />)}</span>
+        <div className="form-group">
+          <AmountInput className="mt-5" />
+          <span>
+            {exchangedAmount || (!!amount && <Spinner />)}
+          </span>
+        </div>
+        <div className="form-group">
+          <Rate from={to} to={from} />
+          <CurrencySelector name={currencyTypeToSelect.to} />
+          <Account currency={to} />
+        </div>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.transferMoney}
+        >
+          Transfer
+        </button>
       </div>
     );
   }
@@ -39,8 +62,9 @@ class ExchangeCalculator extends React.Component {
 
 ExchangeCalculator.propTypes = {
   fetchCurrenciesPeriodically: PropTypes.func.isRequired,
+  transfer: PropTypes.func.isRequired,
   exchangedAmount: PropTypes.number,
-  userEnteredData: PropTypes.number.isRequired,
+  amount: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
 };
 
 export default ExchangeCalculator;

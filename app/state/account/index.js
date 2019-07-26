@@ -1,5 +1,5 @@
 import * as actions from './actions';
 import reducer from './reducer';
-
-export { actions };
+import * as sagas from './sagas';
+export { actions, sagas };
 export default reducer;

@@ -1,11 +1,12 @@
 import { actionTypes } from './actions';
+import { getCurrencyData } from './utils';
 import currencies, { currencyTypeToSelect } from '../../utils/currencies';
 const initialState = {
   [currencyTypeToSelect.from]: currencies.GBP.shortcut,
   [currencyTypeToSelect.to]: currencies.USD.shortcut,
   [currencies.EUR.shortcut]: 150,
   [currencies.USD.shortcut]: 1500,
-  [currencies.GBP.shortcut]: 0,
+  [currencies.GBP.shortcut]: 250,
 };
 
 export default function(state = initialState, action) {
@@ -14,6 +15,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         [action.selectType]: action.currency,
+      };
+    }
+    case actionTypes.VALIDATED_MONEY_TRANSFER: {
+      const { exchangedAmount, amount } = action;
+      const from = getCurrencyData(state, currencyTypeToSelect.from);
+      const to = getCurrencyData(state, currencyTypeToSelect.to);
+
+      return {
+        ...state,
+        [from.name]: from.value - amount,
+        [to.name]: to.value + exchangedAmount,
       };
     }
     default:
