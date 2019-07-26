@@ -1,8 +1,6 @@
 import { actionTypes } from './actions';
-import currencies, { currencyTypeToSelect } from '../../utils/currencies';
+import currencies from '../../utils/currencies';
 const initialState = {
-  [currencyTypeToSelect.from]: currencies.GBP.shortcut,
-  [currencyTypeToSelect.to]: currencies.USD.shortcut,
   updating: false,
   base: currencies.USD.shortcut,
 };
@@ -19,12 +17,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         updating: action.updating,
-      };
-    }
-    case actionTypes.SET_SELECTED_CURRENCY: {
-      return {
-        ...state,
-        [action.selectType]: action.currency,
       };
     }
     default:

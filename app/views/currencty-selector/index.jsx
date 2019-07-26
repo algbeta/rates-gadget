@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { actions } from '../../state/currencies';
+import { actions } from '../../state/account';
 import CurrencySelector from './currencySelector';
 
-const mapStateToProps = ({ EW: { exchange } }, ownProps) => ({
-  selected: exchange[ownProps.name],
+const mapStateToProps = ({ EW: { account } }, ownProps) => ({
+  selected: account[ownProps.name],
 });
 
 const mapDispatchToProps = {

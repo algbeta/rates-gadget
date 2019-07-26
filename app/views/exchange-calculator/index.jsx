@@ -15,20 +15,21 @@ const withSaga = injectSaga({
   mode: DAEMON,
 });
 
-const mapStateToProps = ({ EW: { exchange, amount } }) => {
+const mapStateToProps = ({ EW: { exchange, amount, account } }) => {
   let rate = 0;
-  if (exchange.from === exchange.to) {
+  const { from, to } = account;
+  if (from === to) {
     rate = 1;
   }
-  if (exchange[exchange.from] && exchange[exchange.from][exchange.to]) {
-    rate = exchange[exchange.from][exchange.to];
+  if (exchange[from] && exchange[from][to]) {
+    rate = exchange[from][to];
   }
 
   return {
     userEnteredData: !!amount.value,
     exchangedAmount: +(+amount.value * rate).toFixed(2),
-    from: exchange.from,
-    to: exchange.to,
+    from,
+    to,
   };
 };
 
