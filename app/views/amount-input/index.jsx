@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { actions } from '../../state/amount';
 import AmountInput from './amountInput';
 
-const mapStateToProps = ({ EW: { amount } }) => ({
-  validationFailed: amount.error,
-  amount: amount.value,
+const mapStateToProps = ({ EW: { amount } }, ownProps) => ({
+  validationFailed: !!amount[ownProps.name].error,
+  amount: amount[ownProps.name].value,
 });
 
 const mapDispatchToProps = {

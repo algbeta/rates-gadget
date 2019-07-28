@@ -5,14 +5,11 @@ class AmountInput extends React.PureComponent {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
-    this.state = {
-      value: '',
-    };
   }
 
   handleChange(ev) {
-    this.setState({ value: ev.target.value });
-    this.props.inputExchangeAmount(ev.target.value);
+    const { inputExchangeAmount, name } = this.props;
+    inputExchangeAmount(ev.target.value, name);
   }
 
   getInputClassNames() {
@@ -21,22 +18,15 @@ class AmountInput extends React.PureComponent {
       : 'form-control';
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.amount && this.props.amount === 0) {
-      this.setState({
-        value: '',
-      });
-    }
-  }
-
   render() {
     return (
       <React.Fragment>
-        <label>Only numbers, +/- and . symbols are allowed</label>
+        <span>Only numbers, - and . are allowed</span>
         <input
-          value={this.state.value}
+          name={this.props.name}
           className={this.getInputClassNames()}
           onChange={this.handleChange}
+          value={this.props.amount}
         />
       </React.Fragment>
     );
@@ -46,6 +36,8 @@ class AmountInput extends React.PureComponent {
 AmountInput.propTypes = {
   inputExchangeAmount: PropTypes.func.isRequired,
   validationFailed: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  amount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default AmountInput;

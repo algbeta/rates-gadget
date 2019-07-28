@@ -6,6 +6,7 @@ import { DAEMON } from 'utils/constants';
 import rootSaga from '../state/common/rootSaga';
 import rootReducer from '../state/common/rootReducer';
 import ExchangeCalculator from './exchange-calculator';
+import ErrorBoundary from './error-boundary';
 
 const withSaga = injectSaga({
   key: 'ExchangeCalculator',
@@ -13,7 +14,11 @@ const withSaga = injectSaga({
   mode: DAEMON,
 });
 
-const App = () => <ExchangeCalculator />;
+const App = () => (
+  <ErrorBoundary>
+    <ExchangeCalculator />
+  </ErrorBoundary>
+);
 
 const withReducer = injectReducer({ key: 'EW', reducer: rootReducer });
 

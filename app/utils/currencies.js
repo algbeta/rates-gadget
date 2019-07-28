@@ -21,5 +21,7 @@ const currencyTypeToSelect = {
   to: 'to',
 };
 
-export { currencyTypeToSelect };
+const forceTwoDigitsAfterDot = number => +number.toFixed(2);
+
+export { currencyTypeToSelect, forceTwoDigitsAfterDot };
 export default currencies;

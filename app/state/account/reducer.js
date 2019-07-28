@@ -7,6 +7,7 @@ const initialState = {
   [currencies.EUR.shortcut]: 150,
   [currencies.USD.shortcut]: 1500,
   [currencies.GBP.shortcut]: 250,
+  error: '',
 };
 
 export default function(state = initialState, action) {
@@ -24,10 +25,18 @@ export default function(state = initialState, action) {
 
       return {
         ...state,
-        [from.name]: from.value - amount,
+        [from.name]: from.value + amount,
         [to.name]: to.value + exchangedAmount,
+        error: '',
       };
     }
+    case actionTypes.INVALID_MONEY_TRANSFER: {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
+
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Rate from './rate';
+import { forceTwoDigitsAfterDot } from '../../utils/currencies';
 
 const mapStateToProps = ({ EW: { exchange } }, ownProps) => {
   const { from, to } = ownProps;
@@ -12,7 +13,7 @@ const mapStateToProps = ({ EW: { exchange } }, ownProps) => {
   }
 
   return {
-    rate: +rate.toFixed(4),
+    rate: forceTwoDigitsAfterDot(rate),
   };
 };
 

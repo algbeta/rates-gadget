@@ -8,7 +8,7 @@ export default function* rootSaga() {
     fork(currenciesSagas.fetchCurrenciesSaga),
     fork(currenciesSagas.fetchCurrenciesPeriodicallySaga),
     fork(currenciesSagas.prepareResponseRatesSaga),
-    fork(amountSagas.watchInputSaga),
+    fork(amountSagas.handleInputSaga),
     fork(accountSagas.validateMoneyTransferSaga),
   ]);
 }

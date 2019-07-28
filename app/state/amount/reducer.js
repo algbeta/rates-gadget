@@ -1,8 +1,15 @@
 import { actions as accountActions } from '../account';
 import { actionTypes } from './actions';
+import { currencyTypeToSelect } from '../../utils/currencies';
 const initialState = {
-  value: 0,
-  error: false,
+  [currencyTypeToSelect.to]: {
+    value: '',
+    error: false,
+  },
+  [currencyTypeToSelect.from]: {
+    value: '',
+    error: false,
+  },
 };
 
 export default function(state = initialState, action) {
@@ -10,20 +17,15 @@ export default function(state = initialState, action) {
     case actionTypes.SET_EXCHANGE_AMOUNT: {
       return {
         ...state,
-        value: action.amount,
+        [currencyTypeToSelect[action.inputName]]: {
+          value: action.amount,
+          error: action.error,
+        },
       };
     }
-    case actionTypes.EXCHANGE_AMOUNT_VALIDATION: {
-      return {
-        ...state,
-        error: action.isValid,
-      };
-    }
+    case actionTypes.AMOUNT_CLEAN_UP:
     case accountActions.actionTypes.VALIDATED_MONEY_TRANSFER: {
-      return {
-        ...state,
-        value: 0,
-      };
+      return initialState;
     }
     default:
       return state;

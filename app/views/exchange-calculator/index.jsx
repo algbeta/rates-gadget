@@ -1,24 +1,23 @@
 import { connect } from 'react-redux';
 import { actions } from '../../state/currencies';
 import { actions as accountActions } from '../../state/account';
-import ExchangeCalculator from './exchange-calculator';
+import currencies, { currencyTypeToSelect } from '../../utils/currencies';
+import ExchangeCalculator from './exchangeCalculator';
 import './index.scss';
 
-const mapStateToProps = ({ EW: { exchange, amount, account } }) => {
-  let rate = 0;
-  const { from, to } = account;
-  if (from === to) {
-    rate = 1;
-  }
-  if (exchange[from] && exchange[from][to]) {
-    rate = exchange[from][to];
-  }
-
+const mapStateToProps = ({ EW }) => {
+  const { amount, account, exchange } = EW;
   return {
-    exchangedAmount: +(+amount.value * rate).toFixed(2),
-    from,
-    to,
-    amount: amount.value,
+    from: account.from,
+    to: account.to,
+    sameCurrency: account.from === account.to,
+    amount: amount[currencyTypeToSelect.from].value,
+    areCurrenciesLoaded: !!exchange[currencies.USD.shortcut],
+    validationFailed: !!(
+      amount[currencyTypeToSelect.to].error ||
+      amount[currencyTypeToSelect.from].error
+    ),
+    transactionError: account.error,
   };
 };
 
@@ -26,7 +25,6 @@ const mapDispatchToProps = {
   fetchCurrenciesPeriodically: actions.fetchCurrenciesPeriodically,
   transfer: accountActions.transfer,
 };
-
 
 export default connect(
   mapStateToProps,
