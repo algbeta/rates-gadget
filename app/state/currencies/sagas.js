@@ -1,11 +1,4 @@
-import {
-  put,
-  takeLatest,
-  takeEvery,
-  select,
-  delay,
-  call,
-} from 'redux-saga/effects';
+import { put, takeLatest, select, delay, call } from 'redux-saga/effects';
 import { apiGet } from '../common/api';
 import {
   actionTypes,
@@ -18,7 +11,7 @@ import { processResponse } from './utils';
 import API_URLS from '../../utils/apiUrls';
 
 export function* fetchCurrenciesSaga() {
-  yield takeEvery(actionTypes.FETCH_CURRENCIES, function*() {
+  yield takeLatest(actionTypes.FETCH_CURRENCIES, function*() {
     const url = API_URLS.getLatest('EUR');
     let response = {};
     try {

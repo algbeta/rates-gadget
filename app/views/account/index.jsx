@@ -7,3 +7,4 @@ const mapStateToProps = ({ EW: { account } }, ownProps) => ({
 });
 
 export default connect(mapStateToProps)(Account);
+export { mapStateToProps };

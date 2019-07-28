@@ -14,3 +14,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(CurrencySelector);
+
+export { mapStateToProps, mapDispatchToProps };

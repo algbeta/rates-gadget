@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencySelector tests CurrencySelector renders correctly 1`] = `
+<select
+  className="custom-select mr-sm-2"
+  defaultValue="USD"
+  name="currencySelector"
+  onChange={[Function]}
+>
+  <option
+    value="EUR"
+  >
+    Euro
+  </option>
+  <option
+    value="GBP"
+  >
+    British Pound
+  </option>
+  <option
+    value="USD"
+  >
+    American Dollar
+  </option>
+</select>
+`;
