@@ -2,13 +2,17 @@
 
 exports[`Spinner tests Spinner renders correctly 1`] = `
 <div
-  className="spinner-border"
-  role="status"
+  className="spinner-container"
 >
-  <span
-    className="sr-only"
+  <div
+    className="spinner-border"
+    role="status"
   >
-    Loading...
-  </span>
+    <span
+      className="sr-only"
+    >
+      Loading...
+    </span>
+  </div>
 </div>
 `;
