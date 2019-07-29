@@ -1,37 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class AmountInput extends React.PureComponent {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(ev) {
-    const { inputExchangeAmount, name } = this.props;
+const AmountInput = ({
+  inputExchangeAmount,
+  name,
+  amount,
+  validationFailed,
+}) => {
+  const changeHandler = ev => {
     inputExchangeAmount(ev.target.value, name);
-  }
+  };
 
-  getInputClassNames() {
-    return this.props.validationFailed
-      ? 'form-control  is-invalid'
-      : 'form-control';
-  }
+  const getInputClassNames = () =>
+    validationFailed ? 'form-control  is-invalid' : 'form-control';
 
-  render() {
-    return (
-      <React.Fragment>
-        <span>Only numbers, - and . are allowed</span>
-        <input
-          name={this.props.name}
-          className={this.getInputClassNames()}
-          onChange={this.handleChange}
-          value={this.props.amount}
-        />
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <div className="form-group">
+      <label htmlFor={name}>Only numbers, - and . are allowed</label>
+      <input
+        name={name}
+        className={getInputClassNames()}
+        onChange={changeHandler}
+        value={amount}
+      />
+    </div>
+  );
+};
 
 AmountInput.propTypes = {
   inputExchangeAmount: PropTypes.func.isRequired,

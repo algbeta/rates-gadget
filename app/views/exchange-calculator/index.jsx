@@ -13,10 +13,9 @@ const mapStateToProps = ({ EW }) => {
     sameCurrency: account.from === account.to,
     amount: amount[currencyTypeToSelect.from].value,
     areCurrenciesLoaded: !!exchange[currencies.USD.shortcut],
-    validationFailed: !!(
+    validationFailed:
       amount[currencyTypeToSelect.to].error ||
-      amount[currencyTypeToSelect.from].error
-    ),
+      amount[currencyTypeToSelect.from].error,
     transactionError: account.error,
   };
 };
@@ -30,3 +29,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ExchangeCalculator);
+export { mapStateToProps };

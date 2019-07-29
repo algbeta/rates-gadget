@@ -5,7 +5,7 @@ import { forceTwoDigitsAfterDot } from '../../utils/currencies';
 const mapStateToProps = ({ EW: { exchange } }, ownProps) => {
   const { from, to } = ownProps;
   let rate = 0;
-  if (exchange.from === exchange.to) {
+  if (from === to) {
     rate = 1;
   }
   if (exchange[from] && exchange[from][to]) {
@@ -18,3 +18,4 @@ const mapStateToProps = ({ EW: { exchange } }, ownProps) => {
 };
 
 export default connect(mapStateToProps)(Rate);
+export { mapStateToProps };

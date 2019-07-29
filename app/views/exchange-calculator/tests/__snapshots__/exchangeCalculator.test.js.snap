@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExchangeCalculator tests ExchangeCalculator renders correctly 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Currency exchange
+  </h1>
+  
+  <div
+    className="exchangeCard"
+  />
+  <div
+    className="exchangeCard"
+  />
+  <button
+    className="btn btn-primary float-right"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Transfer
+  </button>
+</div>
+`;
+
+exports[`ExchangeCalculator tests ExchangeCalculator renders spinner when currencies aren't loaded 1`] = `
+<div
+  className="spinner"
+/>
+`;
+
+exports[`ExchangeCalculator tests ExchangeCalculator with transaction error 1`] = `
+<div
+  className="container"
+>
+  <h1>
+    Currency exchange
+  </h1>
+  <div
+    className="alert-secondary"
+    role="alert"
+  >
+    Something went wrong!
+  </div>
+  <div
+    className="exchangeCard"
+  />
+  <div
+    className="exchangeCard"
+  />
+  <button
+    className="btn btn-primary float-right"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Transfer
+  </button>
+</div>
+`;

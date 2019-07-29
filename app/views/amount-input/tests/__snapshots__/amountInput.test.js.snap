@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AmountInput tests AmountInput renders correctly 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    htmlFor="amountInput"
+  >
+    Only numbers, - and . are allowed
+  </label>
+  <input
+    className="form-control"
+    name="amountInput"
+    onChange={[Function]}
+    value={150}
+  />
+</div>
+`;
+
+exports[`AmountInput tests Invalid AmountInput renders correctly 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    htmlFor="amountInput"
+  >
+    Only numbers, - and . are allowed
+  </label>
+  <input
+    className="form-control  is-invalid"
+    name="amountInput"
+    onChange={[Function]}
+    value={150}
+  />
+</div>
+`;
