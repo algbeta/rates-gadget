@@ -55,7 +55,7 @@ function* handleInputSaga() {
         inputName,
         otherInputName,
       );
-      yield put(setExchangeAmount(-exchangedAmount, otherInputName));
+      yield put(setExchangeAmount(-exchangedAmount, otherInputName, false));
       yield put(setExchangeAmount(Number.parseFloat(amount), inputName, false));
     }
   });
