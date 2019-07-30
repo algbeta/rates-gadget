@@ -5,9 +5,9 @@ import { sagas as accountSagas } from '../account';
 
 export default function* rootSaga() {
   yield all([
-    fork(currenciesSagas.fetchCurrenciesSaga),
-    fork(currenciesSagas.fetchCurrenciesPeriodicallySaga),
-    fork(currenciesSagas.prepareResponseRatesSaga),
+    fork(currenciesSagas.fetchCurrenciesWatchSaga),
+    fork(currenciesSagas.fetchCurrenciesPeriodicallyWatchSaga),
+    fork(currenciesSagas.prepareResponseRatesWatchSaga),
     fork(amountSagas.handleCurrencySelectSaga),
     fork(amountSagas.handleInputSaga),
     fork(accountSagas.validateMoneyTransferSaga),
